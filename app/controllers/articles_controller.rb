@@ -5,9 +5,24 @@ class ArticlesController < ApplicationController
     redirect_to article_version_path(@article, @article.latest_version)
   end
 
+  def index
+    @featured_articles = Article.featured
+  end
+
+  def search
+    @search_param = params[:q]
+    @search_results = Article.search(@search_param)
+    render :search
+  end
+
   def new
     @article = Article.new
     @article.versions.build
+  end
+
+  def show
+    @article = Article.find(params[:id])
+    redirect_to article_version_path(@article, @article.latest_version)
   end
 
   def create

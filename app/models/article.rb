@@ -11,4 +11,12 @@ class Article < ApplicationRecord
   def prior_versions
     versions.order("created_at")[0..-2]
   end
+
+  def self.featured
+    Article.where(is_featured: true)
+  end
+
+  def self.search(param)
+    Article.select { |article| article.title.downcase.include? param.downcase}
+  end
 end

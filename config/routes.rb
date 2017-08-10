@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, except: [:index, :edit, :update]
 
+  get 'search' => 'articles#search'
+
 end
